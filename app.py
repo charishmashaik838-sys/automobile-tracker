@@ -8,10 +8,16 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'supersecretkey')
 
 # Database Configuration
-SQLALCHEMY_DATABASE_URI = 'sqlite:///automobile.db'
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://mysqladmin:charishma%40123@automobilemysql2026.mysql.database.azure.com/automobiledb'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    "connect_args": {
+	"ssl": {"ssl_disabled": False}
+    }
+}
 
 db.init_app(app)
 
